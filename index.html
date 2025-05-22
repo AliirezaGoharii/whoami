@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Who am I?</title>
+    <link rel="shortcut icon" href="profile.jpg" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #0a0a0a;
+            --accent-red: #ff1a4f;
+            --accent-pink: #ff4d79;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --card-bg: #1a1a1a;
+            --gradient-red: linear-gradient(45deg, var(--accent-red), var(--accent-pink));
+            --hover-transition: 0.25s ease-out;
+            --shadow-intensity: 0.2;
+            --sb-track-color: #333333;
+            --sb-thumb-color: rgb(158, 19, 51);
+            --sb-size: 3px;
+            --sb-hover-size: 7px;
+        }
+
+        ::selection {
+            background-color: var(--accent-pink) !important;
+            color: var(--text-secondary) !important;
+        }
+
+        body::-webkit-scrollbar {
+            width: var(--sb-size);
+        }
+
+        body::-webkit-scrollbar-track {
+            background: var(--sb-track-color);
+            border-radius: 4px;
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background: var(--sb-thumb-color);
+            border-radius: 4px;
+        }
+
+        @supports not selector(::-webkit-scrollbar) {
+            body {
+                scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .navbar {
+            background: rgba(10, 10, 10, 0.9) !important;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 0;
+            transition: var(--hover-transition);
+        }
+
+        .navbar:hover {
+            background: rgba(26, 26, 26, 0.95) !important;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            background: var(--gradient-red);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: var(--hover-transition);
+        }
+
+        .navbar-brand:hover {
+            opacity: 0.9;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            transition: var(--hover-transition);
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-red);
+            transition: var(--hover-transition);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Main Container */
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            padding: 1rem;
+        }
+
+        .main-content {
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        /* Profile Section */
+        .profile-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: var(--hover-transition);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 15px -5px rgba(255, 26, 79, calc(var(--shadow-intensity) * 0.3));
+        }
+
+        .profile-card:hover::before {
+            opacity: 0.15;
+        }
+
+        .img-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-red);
+            transition: var(--hover-transition);
+            filter: grayscale(20%);
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 26, 79, 0.4);
+            filter: grayscale(0%);
+        }
+
+        .profile-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: var(--gradient-red);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: block;
+            transition: var(--hover-transition);
+            text-align: center;
+        }
+
+        .profile-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-red);
+            transition: var(--hover-transition);
+        }
+
+        .profile-title:hover::after {
+            width: 100%;
+        }
+
+        .profile-subtitle {
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: var(--hover-transition);
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: var(--accent-red);
+            transform: translateY(-3px) scale(1.1);
+            color: white;
+            box-shadow: 0 8px 20px rgba(255, 26, 79, 0.4);
+        }
+
+        /* Skill Badges */
+        .skill-badge {
+            background: rgba(255, 26, 79, 0.1);
+            color: var(--accent-red);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin: 0.25rem;
+            transition: var(--hover-transition);
+            border: 1px solid rgba(255, 26, 79, 0.3);
+            cursor: pointer;
+        }
+
+        .skill-badge:hover {
+            background: var(--accent-red);
+            color: white;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 15px rgba(255, 26, 79, 0.3);
+        }
+
+        /* Main Content Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            padding: 1.5rem 0;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: var(--hover-transition);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            background: var(--gradient-red);
+            z-index: -1;
+            opacity: 0;
+            transition: var(--hover-transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px -5px rgba(255, 26, 79, calc(var(--shadow-intensity) * 0.3));
+        }
+
+        .feature-card:hover::before {
+            opacity: 0.08;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 70%;
+            background: var(--gradient-red);
+            border-radius: 2px;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            margin-bottom: 1rem;
+        }
+
+        .skill-category h5 {
+            margin-bottom: 0.75rem;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            /* justify-content: center; */
+            gap: 0.5rem;
+        }
+
+        /* Responsive Design Tweaks */
+        @media (max-width: 768px) {
+            .profile-card, .feature-card {
+                margin: 0 1rem;
+                padding: 1.25rem;
+            }
+            
+            .profile-title {
+                font-size: 1.5rem;
+            }
+            
+            .profile-img {
+                width: 100px;
+                height: 100px;
+            }
+            body {
+                padding-right: 30px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 0.3fr 1fr;
+                gap: 2rem;
+                padding: 2rem 0;
+            }
+
+
+            
+            .modern-sidebar {
+                position: sticky;
+                top: 1rem;
+                align-self: start;
+            }
+            
+            .profile-card, .feature-card {
+                padding: 2rem;
+            }
+            .feature-card {
+                min-height: 166px;
+            }
+        }
+
+        /* Advanced Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+        /* Custom Scrollbar Hover Effect */
+        body:hover::-webkit-scrollbar {
+            width: var(--sb-hover-size);
+        }
+
+        /* Enhanced Glow Effect */
+        .glow-on-hover {
+            position: relative;
+            z-index: 0;
+        }
+
+        .glow-on-hover::before {
+            content: '';
+            background: var(--gradient-red);
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            z-index: -1;
+            filter: blur(8px);
+            opacity: 0;
+            transition: opacity var(--hover-transition);
+            border-radius: inherit;
+        }
+
+        .glow-on-hover:hover::before {
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="main-content">
+            <div class="main-grid animate-fade-in">
+                <aside class="modern-sidebar animate-fade-in delay-1">
+                    <div class="profile-card glow-on-hover">
+                        <div class="img-container">
+                            <img src="./profile.jpg" alt="Profile Image" class="profile-img">
+                        </div>
+                        <h1 class="profile-title">SaiKo</h1>
+                        <p class="profile-subtitle">Web Developer</p>
+                        <p class="text-secondary text-center">Some Skills for Full-Stack Web Development</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="bi bi-github"></i></a>
+                            <a href="#" class="social-link"><i class="bi bi-telegram"></i></a>
+                            <a href="#" class="social-link"><i class="bi bi-twitter-x"></i></a>
+                            <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="feature-card mt-4 glow-on-hover py-4">
+                        <h4 class="mt-3 mb-2 text-center"><i class="bi bi-envelope fs-5" style="color: var(--accent-red);"></i> | Contact Me</h4>
+                        <p class="text-secondary text-center">In Telegram</p>
+                    </div>
+                </aside>
+
+                <div class="content-area">
+                    <section id="about" class="mb-4 animate-fade-in delay-2">
+                        <div class="feature-card glow-on-hover">
+                            <h3 class="section-title">About Me</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Temporibus, eligendi adipisci? Unde explicabo odio, sint repellendus dolore rem quae voluptas ab accusamus dignissimos, ut, esse quo consequatur porro odit doloremque praesentium consectetur?</p>
+                        </div>
+                    </section>
+
+                    <section id="skills" class="my-4 animate-fade-in delay-2">
+                        <div class="feature-card glow-on-hover">
+                            <h3 class="section-title">Technical Skills</h3>
+                            <div class="skills-container" id="skillsContainer">
+                                <!-- Skills will be loaded here by JavaScript -->
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Technical Skills Data
+        const technicalSkills = {
+            frontend: {
+                name: "Frontend Development",
+                skills: ["HTML5", "CSS3", "Tailwind", "JavaScript", "Vue.js 3", "Inertia.js"]
+            },
+            backend: {
+                name: "BackEnd Development",
+                skills: ["PHP", "Laravel", "Node.js", "MySQL", "PostgreSQL"]
+            }
+        };
+
+        // Function to render skills
+        function renderSkills() {
+            const container = document.getElementById('skillsContainer');
+            
+            for (const category in technicalSkills) {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'skill-category';
+                
+                const title = document.createElement('h5');
+                title.className = 'mb-3';
+                title.textContent = technicalSkills[category].name;
+                
+                const skillsDiv = document.createElement('div');
+                skillsDiv.className = 'skills-list';
+                
+                technicalSkills[category].skills.forEach(skill => {
+                    const badge = document.createElement('span');
+                    badge.className = 'skill-badge';
+                    badge.textContent = skill;
+                    skillsDiv.appendChild(badge);
+                });
+                
+                categoryDiv.appendChild(title);
+                categoryDiv.appendChild(skillsDiv);
+                container.appendChild(categoryDiv);
+            }
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            renderSkills();
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.animate-fade-in').forEach(el => observer.observe(el));
+        });
+
+        document.addEventListener('mousemove', function(e) {
+            const scrollbar = document.querySelector('body::-webkit-scrollbar');
+            if (e.clientX > window.innerWidth - 20) {
+                document.documentElement.style.setProperty('--sb-size', 'var(--sb-hover-size)');
+            } else {
+                document.documentElement.style.setProperty('--sb-size', '7px');
+            }
+        });
+
+        function searchInGoogle(query) {
+            const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+            window.open(googleSearchUrl, "_blank");
+        }
+        
+        document.getElementById('skillsContainer').addEventListener('click', function(e) {
+            if (e.target.classList.contains('skill-badge')) {
+                const searchText = e.target.textContent;
+                searchInGoogle(searchText);
+            }
+        });
+    </script>
+</body>
+</html>
