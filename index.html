@@ -554,6 +554,21 @@
                 searchInGoogle(searchText);
             }
         });
+
+        const waveSymbols = ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "▆", "▅", "▄", "▃", "▁"];
+        let wavePosition = 0;
+        const originalTitle = document.title;
+
+        function animateTitle() {
+            document.title = waveSymbols[wavePosition] + " " + originalTitle;
+
+            wavePosition = (wavePosition + 1) % waveSymbols.length;
+
+            setTimeout(animateTitle, 200);
+        }
+
+        animateTitle();
+
     </script>
 </body>
 </html>
