@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://aliirezagoharii.github.io/whoami/sitemap.xml
