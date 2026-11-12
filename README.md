@@ -58,6 +58,8 @@ Regeneration needs a system FreeType library. The generator prefers the local fo
 
 ## Deploy or share
 
-Deploy `index.html`, `fonts/`, `zenith.svg`, and `og.png` to a static host. Keep the canonical and social URLs in `src/index.html` aligned with the final host.
+The live site is GitHub Pages at <https://alirezagohari.my.id/>, served from the `main` branch root. `CNAME` pins the custom domain; the canonical, social and sitemap URLs already point at it. Pushing to `main` publishes automatically.
+
+Any other static host works too: deploy `index.html`, `fonts/`, `zenith.svg`, and `og.png`. Keep the canonical and social URLs in `src/index.html` aligned with that host.
 
 `./live.sh` rebuilds the page, starts a local server, and creates a temporary Cloudflare tunnel. `./live.sh ssh` uses the existing SSH alternative.
